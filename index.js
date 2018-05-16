@@ -25,20 +25,25 @@ app.get('/ej2/:palabra/:palabra2', (req, res)=> {
 
 "use strict";
 
-const express = require('express');
-const app = express();
+"use strict";
+
 
 app.get('/', (req, res, next) => {
   res.send('Hello World\n');
 });
 
-app.use( (req, res, next) => {
+app.use((req, res, next) => {
   res.status(404);
   res.json({
-    "error": "Error. Route not found"
+    "error": "Error.page not found"
   });
 });
-
+app.use((err, req, res, next) => {
+  res.status(500);
+  res.json({
+    "error": `${err}`
+  });
+});
   
   module.exports = app;
 app.listen(3000, () => console.log('servidor levantado en 3000'));
